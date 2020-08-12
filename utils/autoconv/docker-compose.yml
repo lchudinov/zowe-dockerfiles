@@ -1,0 +1,19 @@
+version: "3.3"
+services:
+  zowe:
+    image: rsqa/zowe-v1-lts:jdk8
+    ports:
+      - 8052:8544
+    environment:
+      ZOWE_IP_ADDRESS: 10.117.112.103
+      LAUNCH_COMPONENT_GROUPS: DESKTOP
+      ZOSMF_HOST: rs28.rocketsoftware.com
+      ZWED_agent_host: rs28.rocketsoftware.com
+      ZOSMF_PORT: 11443
+      ZWED_agent_http_port: 8051
+      ZWE_CHECK_REFERRER: "false"
+    volumes: 
+      - type: bind
+        source: ~/tmp
+        target: /root/zowe/apps
+    command: "/root/zowe/apps/izsme/om-web/scripts/zowe_install_izsme.sh /root/zowe/instance /root/zowe/apps/izsme/"
